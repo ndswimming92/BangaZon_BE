@@ -4,6 +4,17 @@ using System.Runtime.CompilerServices;
 
 public class BangaZonDbContext : DbContext
 {
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        // seed data with campsite types
+        modelBuilder.Entity<Category>().HasData(new Category[]
+        {
+        new Category {Id = 1, Name = "Tent", ItemCount = 1},
+        new Category {Id = 2, Name = "RV", ItemCount = 2},
+        new Category {Id = 3, Name = "Primitive", ItemCount = 10},
+        new Category {Id = 4, Name = "Hammock", ItemCount = 12}
+        });
+    }
 
     public DbSet<Category> Categories { get; set; }
     public DbSet<Order> Orders { get; set; }
