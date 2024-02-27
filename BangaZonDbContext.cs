@@ -35,9 +35,9 @@ public class BangaZonDbContext : DbContext
         // seed data with Product types
         modelBuilder.Entity<Product>().HasData(new Product[]
         {
-        new Product {Id = 1, Title = "Product 1", Description = "Description 1", QuantityAvailable = "10", PricePerUnit = 100, CategoryId = "1", TimePosted = "2024-02-24", userId = "user1"},
-        new Product {Id = 2, Title = "Product 2", Description = "Description 2", QuantityAvailable = "20", PricePerUnit = 200, CategoryId = "2", TimePosted = "2024-02-24", userId = "user2"},
-        new Product {Id = 3, Title = "Product 3", Description = "Description 3", QuantityAvailable = "30", PricePerUnit = 300, CategoryId = "3", TimePosted = "2024-02-24", userId = "user3"}
+        new Product {Id = 1, Title = "Product 1", Description = "Description 1", QuantityAvailable = "10", PricePerUnit = 100, CategoryId = "1", TimePosted = "2024-02-24", UserId = "user1"},
+        new Product {Id = 2, Title = "Product 2", Description = "Description 2", QuantityAvailable = "20", PricePerUnit = 200, CategoryId = "2", TimePosted = "2024-02-24", UserId = "user2"},
+        new Product {Id = 3, Title = "Product 3", Description = "Description 3", QuantityAvailable = "30", PricePerUnit = 300, CategoryId = "3", TimePosted = "2024-02-24", UserId = "user3"}
         });
 
         // seed data with ProductOrder types
@@ -51,9 +51,9 @@ public class BangaZonDbContext : DbContext
         // seed data with User types
         modelBuilder.Entity<User>().HasData(new User[]
         {
-        new User {Id = 1, Name = "Nicholas Davidson", email = "user1@example.com", role = "Role1"},
-        new User {Id = 2, Name = "James Collier", email = "user2@example.com", role = "Role2"},
-        new User {Id = 3, Name = "Willy Wonka", email = "user3@example.com", role = "Role3"}
+        new User {Id = 1, Name = "Nicholas Davidson", Email = "user1@example.com", Role = "Role1"},
+        new User {Id = 2, Name = "James Collier", Email = "user2@example.com", Role = "Role2"},
+        new User {Id = 3, Name = "Willy Wonka", Email = "user3@example.com", Role = "Role3"}
         });
 
     }
