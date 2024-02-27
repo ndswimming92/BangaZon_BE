@@ -27,9 +27,9 @@ public class BangaZonDbContext : DbContext
         // seed data with PaymentType types
         modelBuilder.Entity<PaymentType>().HasData(new PaymentType[]
         {
-        new PaymentType {Id = 1, UserId = "user1", Type = "Type1"},
-        new PaymentType {Id = 2, UserId = "user2", Type = "Type2"},
-        new PaymentType {Id = 3, UserId = "user3", Type = "Type3"}
+        new PaymentType {Id = 1, UserId = "1", Type = "Type1"},
+        new PaymentType {Id = 2, UserId = "2", Type = "Type2"},
+        new PaymentType {Id = 3, UserId = "3", Type = "Type3"}
         });
 
         // seed data with Product types
@@ -51,9 +51,9 @@ public class BangaZonDbContext : DbContext
         // seed data with User types
         modelBuilder.Entity<User>().HasData(new User[]
         {
-        new User {Id = 1, Name = "User 1", email = "user1@example.com", role = "Role1"},
-        new User {Id = 2, Name = "User 2", email = "user2@example.com", role = "Role2"},
-        new User {Id = 3, Name = "User 3", email = "user3@example.com", role = "Role3"}
+        new User {Id = 1, Name = "Nicholas Davidson", email = "user1@example.com", role = "Role1"},
+        new User {Id = 2, Name = "James Collier", email = "user2@example.com", role = "Role2"},
+        new User {Id = 3, Name = "Willy Wonka", email = "user3@example.com", role = "Role3"}
         });
 
     }
