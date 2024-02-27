@@ -9,7 +9,7 @@
         public int? PricePerUnit { get; set; }
         public string? CategoryId { get; set; }
         public string? TimePosted { get; set; }
-        public string? userId { get; set; }
+        public string? UserId { get; set; }
 
     }
 }
