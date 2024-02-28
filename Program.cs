@@ -2,6 +2,7 @@ using BangaZon_ND.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Http.Json;
+using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -61,5 +62,14 @@ app.MapGet("/api/searchProducts", async (BangaZonDbContext db, string keyword) =
 
     return Results.Ok(products);
 });
+
+//Get All Users
+app.MapGet("/api/users", (BangaZonDbContext db) =>
+{
+    return db.Users.ToList();
+});
+
+// Customer can delete a product from an order.
+
 
 app.Run();
