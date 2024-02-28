@@ -2,6 +2,7 @@ using BangaZon_ND.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Http.Json;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -33,6 +34,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 
+// Endpoint to See all sellers Products
 app.MapGet("/api/seeAllProducts", async (BangaZonDbContext db) =>
 {
     
@@ -42,6 +44,22 @@ app.MapGet("/api/seeAllProducts", async (BangaZonDbContext db) =>
 
         return Results.Ok(products);
     
+});
+
+// Endpoint to search for products
+app.MapGet("/api/searchProducts", async (BangaZonDbContext db, string keyword) =>
+{
+    
+    if (string.IsNullOrEmpty(keyword))
+    {
+        return Results.BadRequest("Keyword cannot be empty.");
+    }
+
+    var products = await db.Products
+        .Where(p => p.Title.Contains(keyword) || p.Description.Contains(keyword))
+        .ToListAsync();
+
+    return Results.Ok(products);
 });
 
 app.Run();
