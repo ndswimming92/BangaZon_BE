@@ -82,6 +82,19 @@ app.MapGet("/api/users/{id}", (BangaZonDbContext db, int id) =>
     return Results.Ok(userId);
 });
 
+// Get All orders for one user
+app.MapGet("/api/orders/forUser", (BangaZonDbContext db, int UserId) =>
+{
+    var allOrdersForOneUser = db.Orders.Where(c => c.UserId == UserId).ToList();
+
+    if (!allOrdersForOneUser.Any())
+    {
+        return Results.NotFound("No Orders found for this customer.");
+    }
+
+    return Results.Ok(allOrdersForOneUser);
+});
+
 // Customer can delete a product from an order.
 
 
