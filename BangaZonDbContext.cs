@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using BangaZon_ND.Models;
-using System.Runtime.CompilerServices;
-using System;
 
 public class BangaZonDbContext : DbContext
 {
@@ -28,9 +26,9 @@ public class BangaZonDbContext : DbContext
         // seed data with PaymentType types
         modelBuilder.Entity<PaymentType>().HasData(new PaymentType[]
         {
-        new PaymentType {Id = 1, UserId = 1, Type = "Type1"},
-        new PaymentType {Id = 2, UserId = 2, Type = "Type2"},
-        new PaymentType {Id = 3, UserId = 3, Type = "Type3"}
+        new PaymentType {Id = 1, Type = "Type1"},
+        new PaymentType {Id = 2, Type = "Type2"},
+        new PaymentType {Id = 3, Type = "Type3"}
         });
 
         // seed data with Product types

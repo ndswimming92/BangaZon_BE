@@ -9,9 +9,9 @@
         public int? PricePerUnit { get; set; }
         public int? CategoryId { get; set; }
         public DateTime? TimePosted { get; set; }
-        public int? UserId { get; set; }
+        public int UserId { get; set; }
 
-        public Boolean? UserIsSeller { get; set;}
+        public Boolean? UserIsSeller { get; set; }
 
     }
 }

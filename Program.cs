@@ -33,4 +33,15 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 
+app.MapGet("/api/seeAllProducts", async (BangaZonDbContext db) =>
+{
+    
+        var products = await db.Products
+            .Where(p => p.UserIsSeller == true)
+            .ToListAsync();
+
+        return Results.Ok(products);
+    
+});
+
 app.Run();
