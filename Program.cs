@@ -69,6 +69,19 @@ app.MapGet("/api/users", (BangaZonDbContext db) =>
     return db.Users.ToList();
 });
 
+//Get Single User
+app.MapGet("/api/users/{id}", (BangaZonDbContext db, int id) =>
+{
+    var userId = db.Users.FirstOrDefault(c => c.Id == id);
+
+    if (userId == null)
+    {
+        return Results.NotFound("User was not found.");
+    }
+
+    return Results.Ok(userId);
+});
+
 // Customer can delete a product from an order.
 
 
