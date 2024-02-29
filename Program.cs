@@ -138,7 +138,12 @@ app.MapPost("/api/createNewProduct", (BangaZonDbContext db, Product newProduct) 
 });
 
 // Add a Product to an Order
-
+app.MapPost("/api/addProductToOrder", (BangaZonDbContext db, ProductOrder newProductOrder) =>
+{
+    db.ProductOrders.Add(newProductOrder);
+    db.SaveChanges();
+    return Results.Created($"/api/addProductToOrder/{newProductOrder.Id}", newProductOrder);
+});
 
 
 app.Run();
