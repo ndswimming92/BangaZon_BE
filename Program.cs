@@ -35,16 +35,18 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 
-// Endpoint to See all sellers Products
-app.MapGet("/api/seeAllProducts", async (BangaZonDbContext db) =>
+// Get all sellers Products
+app.MapGet("/api/products/bySeller", (BangaZonDbContext db, int UserId) =>
 {
-    
-        var products = await db.Products
-            .Where(p => p.UserIsSeller == true)
-            .ToListAsync();
+    var productsBySeller = db.Products.Where(c => c.UserId == UserId).ToList();
 
-        return Results.Ok(products);
-    
+    // If products do NOT match
+    if (!productsBySeller.Any())
+    {
+        return Results.NotFound("No Products found for this seller.");
+    }
+
+    return Results.Ok(productsBySeller);
 });
 
 // Get Single product
