@@ -164,7 +164,27 @@ app.MapPut("/api/updateUser/{id}", (BangaZonDbContext db, int id, User user) =>
 });
 
 // Update a Product
+app.MapPut("/api/updateProduct/{id}", (BangaZonDbContext db, int id, Product product) =>
+{
+    Product updatedProduct = db.Products.SingleOrDefault(product => product.Id == id);
+    if (updatedProduct == null)
+    {
+        return Results.NotFound();
+    }
 
+    updatedProduct.Title = product.Title;
+    updatedProduct.Description = product.Description;
+    updatedProduct.QuantityAvailable = product.QuantityAvailable;
+    updatedProduct.PricePerUnit = product.PricePerUnit;
+    updatedProduct.CategoryId = product.CategoryId;
+    updatedProduct.TimePosted = product.TimePosted;
+    updatedProduct.UserId = product.UserId;
+    updatedProduct.UserIsSeller = product.UserIsSeller;
+
+
+    db.SaveChanges();
+    return Results.Created($"/api/updateProduct/{id}/{product.Id}", product);
+});
 
 // Update a Order
 
