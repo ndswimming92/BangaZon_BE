@@ -121,11 +121,19 @@ app.MapPost("/api/createNewUser", (BangaZonDbContext db, User newUser) =>
     return Results.Created($"/api/createNewUser/{newUser.Id}", newUser);
 });
 
-// Create a Order
+// Create a New Order
+app.MapPost("/api/createNewOrder", (BangaZonDbContext db, Order newOrder) =>
+{
+    db.Orders.Add(newOrder);
+    db.SaveChanges();
+    return Results.Created($"/api/createNewOrder/{newOrder.Id}", newOrder);
+});
 
 // Create New Product
 
+
 // Add a Product to an Order
+
 
 
 app.Run();
