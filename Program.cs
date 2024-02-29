@@ -88,7 +88,7 @@ app.MapGet("/api/orders/forUser", (BangaZonDbContext db, int UserId) =>
 
     if (!allOrdersForOneUser.Any())
     {
-        return Results.NotFound("No Orders found for this customer.");
+        return Results.NotFound("No Orders found for this user.");
     }
 
     return Results.Ok(allOrdersForOneUser);
@@ -98,6 +98,19 @@ app.MapGet("/api/orders/forUser", (BangaZonDbContext db, int UserId) =>
 app.MapGet("/api/products", (BangaZonDbContext db) =>
 {
     return db.Products.ToList();
+});
+
+// Get All Products for a single Category
+app.MapGet("/api/products/byCategory", (BangaZonDbContext db, int categoryId) =>
+{
+    var productsByCategory = db.Products.Where(c => c.CategoryId == categoryId).ToList();
+
+    if (!productsByCategory.Any())
+    {
+        return Results.NotFound("No Products found for this category.");
+    }
+
+    return Results.Ok(productsByCategory);
 });
 
 
