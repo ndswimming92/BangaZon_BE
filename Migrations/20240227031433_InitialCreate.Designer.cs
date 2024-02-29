@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BangaZon_ND.Migrations
 {
     [DbContext(typeof(BangaZonDbContext))]
-    [Migration("20240227003952_InitialCreate")]
+    [Migration("20240227031433_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,13 +25,13 @@ namespace BangaZon_ND.Migrations
 
             modelBuilder.Entity("BangaZon_ND.Models.Category", b =>
                 {
-                    b.Property<int?>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int?>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("ItemCount")
+                    b.Property<int>("ItemCount")
                         .HasColumnType("integer");
 
                     b.Property<string>("Name")
@@ -88,7 +88,7 @@ namespace BangaZon_ND.Migrations
                     b.Property<int?>("ProductsId")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("UserId")
+                    b.Property<int>("UserId")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
@@ -99,7 +99,7 @@ namespace BangaZon_ND.Migrations
                         new
                         {
                             Id = 1,
-                            OrderDate = new DateTime(2024, 2, 26, 18, 39, 52, 635, DateTimeKind.Local).AddTicks(4959),
+                            OrderDate = new DateTime(2024, 2, 26, 21, 14, 33, 228, DateTimeKind.Local).AddTicks(5622),
                             OrderStatus = true,
                             PaymentType = 1,
                             ProductsId = 1,
@@ -108,7 +108,7 @@ namespace BangaZon_ND.Migrations
                         new
                         {
                             Id = 2,
-                            OrderDate = new DateTime(2024, 2, 26, 18, 39, 52, 635, DateTimeKind.Local).AddTicks(5009),
+                            OrderDate = new DateTime(2024, 2, 26, 21, 14, 33, 228, DateTimeKind.Local).AddTicks(5712),
                             OrderStatus = true,
                             PaymentType = 2,
                             ProductsId = 2,
@@ -117,7 +117,7 @@ namespace BangaZon_ND.Migrations
                         new
                         {
                             Id = 3,
-                            OrderDate = new DateTime(2024, 2, 26, 18, 39, 52, 635, DateTimeKind.Local).AddTicks(5012),
+                            OrderDate = new DateTime(2024, 2, 26, 21, 14, 33, 228, DateTimeKind.Local).AddTicks(5715),
                             OrderStatus = false,
                             PaymentType = 1,
                             ProductsId = 3,
@@ -136,9 +136,6 @@ namespace BangaZon_ND.Migrations
                     b.Property<string>("Type")
                         .HasColumnType("text");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("text");
-
                     b.HasKey("Id");
 
                     b.ToTable("PaymentTypes");
@@ -147,20 +144,17 @@ namespace BangaZon_ND.Migrations
                         new
                         {
                             Id = 1,
-                            Type = "Type1",
-                            UserId = "user1"
+                            Type = "Type1"
                         },
                         new
                         {
                             Id = 2,
-                            Type = "Type2",
-                            UserId = "user2"
+                            Type = "Type2"
                         },
                         new
                         {
                             Id = 3,
-                            Type = "Type3",
-                            UserId = "user3"
+                            Type = "Type3"
                         });
                 });
 
@@ -172,8 +166,8 @@ namespace BangaZon_ND.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int?>("Id"));
 
-                    b.Property<string>("CategoryId")
-                        .HasColumnType("text");
+                    b.Property<int?>("CategoryId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Description")
                         .HasColumnType("text");
@@ -181,17 +175,20 @@ namespace BangaZon_ND.Migrations
                     b.Property<int?>("PricePerUnit")
                         .HasColumnType("integer");
 
-                    b.Property<string>("QuantityAvailable")
-                        .HasColumnType("text");
+                    b.Property<int?>("QuantityAvailable")
+                        .HasColumnType("integer");
 
-                    b.Property<string>("TimePosted")
-                        .HasColumnType("text");
+                    b.Property<DateTime?>("TimePosted")
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Title")
                         .HasColumnType("text");
 
-                    b.Property<string>("userId")
-                        .HasColumnType("text");
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
+                    b.Property<bool?>("UserIsSeller")
+                        .HasColumnType("boolean");
 
                     b.HasKey("Id");
 
@@ -201,35 +198,38 @@ namespace BangaZon_ND.Migrations
                         new
                         {
                             Id = 1,
-                            CategoryId = "1",
+                            CategoryId = 1,
                             Description = "Description 1",
                             PricePerUnit = 100,
-                            QuantityAvailable = "10",
-                            TimePosted = "2024-02-24",
+                            QuantityAvailable = 10,
+                            TimePosted = new DateTime(2024, 2, 26, 21, 14, 33, 228, DateTimeKind.Local).AddTicks(5787),
                             Title = "Product 1",
-                            userId = "user1"
+                            UserId = 1,
+                            UserIsSeller = true
                         },
                         new
                         {
                             Id = 2,
-                            CategoryId = "2",
+                            CategoryId = 2,
                             Description = "Description 2",
                             PricePerUnit = 200,
-                            QuantityAvailable = "20",
-                            TimePosted = "2024-02-24",
+                            QuantityAvailable = 20,
+                            TimePosted = new DateTime(2024, 2, 26, 21, 14, 33, 228, DateTimeKind.Local).AddTicks(5793),
                             Title = "Product 2",
-                            userId = "user2"
+                            UserId = 2,
+                            UserIsSeller = false
                         },
                         new
                         {
                             Id = 3,
-                            CategoryId = "3",
+                            CategoryId = 3,
                             Description = "Description 3",
                             PricePerUnit = 300,
-                            QuantityAvailable = "30",
-                            TimePosted = "2024-02-24",
+                            QuantityAvailable = 30,
+                            TimePosted = new DateTime(2024, 2, 26, 21, 14, 33, 228, DateTimeKind.Local).AddTicks(5798),
                             Title = "Product 3",
-                            userId = "user3"
+                            UserId = 3,
+                            UserIsSeller = true
                         });
                 });
 
@@ -274,19 +274,19 @@ namespace BangaZon_ND.Migrations
 
             modelBuilder.Entity("BangaZon_ND.Models.User", b =>
                 {
-                    b.Property<int?>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int?>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .HasColumnType("text");
+
+                    b.Property<bool?>("IsSeller")
+                        .HasColumnType("boolean");
 
                     b.Property<string>("Name")
-                        .HasColumnType("text");
-
-                    b.Property<string>("email")
-                        .HasColumnType("text");
-
-                    b.Property<string>("role")
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -297,23 +297,23 @@ namespace BangaZon_ND.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "User 1",
-                            email = "user1@example.com",
-                            role = "Role1"
+                            Email = "user1@example.com",
+                            IsSeller = true,
+                            Name = "Nicholas Davidson"
                         },
                         new
                         {
                             Id = 2,
-                            Name = "User 2",
-                            email = "user2@example.com",
-                            role = "Role2"
+                            Email = "user2@example.com",
+                            IsSeller = false,
+                            Name = "James Collier"
                         },
                         new
                         {
                             Id = 3,
-                            Name = "User 3",
-                            email = "user3@example.com",
-                            role = "Role3"
+                            Email = "user3@example.com",
+                            IsSeller = false,
+                            Name = "Willy Wonka"
                         });
                 });
 #pragma warning restore 612, 618

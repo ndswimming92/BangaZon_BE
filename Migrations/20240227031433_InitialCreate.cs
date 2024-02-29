@@ -17,7 +17,7 @@ namespace BangaZon_ND.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "text", nullable: true),
-                    ItemCount = table.Column<int>(type: "integer", nullable: true)
+                    ItemCount = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -30,7 +30,7 @@ namespace BangaZon_ND.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    UserId = table.Column<int>(type: "integer", nullable: true),
+                    UserId = table.Column<int>(type: "integer", nullable: false),
                     PaymentType = table.Column<int>(type: "integer", nullable: true),
                     OrderDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     OrderStatus = table.Column<bool>(type: "boolean", nullable: true),
@@ -47,7 +47,6 @@ namespace BangaZon_ND.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    UserId = table.Column<string>(type: "text", nullable: true),
                     Type = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
@@ -77,11 +76,12 @@ namespace BangaZon_ND.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Title = table.Column<string>(type: "text", nullable: true),
                     Description = table.Column<string>(type: "text", nullable: true),
-                    QuantityAvailable = table.Column<string>(type: "text", nullable: true),
+                    QuantityAvailable = table.Column<int>(type: "integer", nullable: true),
                     PricePerUnit = table.Column<int>(type: "integer", nullable: true),
-                    CategoryId = table.Column<string>(type: "text", nullable: true),
-                    TimePosted = table.Column<string>(type: "text", nullable: true),
-                    userId = table.Column<string>(type: "text", nullable: true)
+                    CategoryId = table.Column<int>(type: "integer", nullable: true),
+                    TimePosted = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    UserId = table.Column<int>(type: "integer", nullable: false),
+                    UserIsSeller = table.Column<bool>(type: "boolean", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -95,8 +95,8 @@ namespace BangaZon_ND.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "text", nullable: true),
-                    email = table.Column<string>(type: "text", nullable: true),
-                    role = table.Column<string>(type: "text", nullable: true)
+                    Email = table.Column<string>(type: "text", nullable: true),
+                    IsSeller = table.Column<bool>(type: "boolean", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -119,19 +119,19 @@ namespace BangaZon_ND.Migrations
                 columns: new[] { "Id", "OrderDate", "OrderStatus", "PaymentType", "ProductsId", "UserId" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 2, 26, 18, 39, 52, 635, DateTimeKind.Local).AddTicks(4959), true, 1, 1, 1 },
-                    { 2, new DateTime(2024, 2, 26, 18, 39, 52, 635, DateTimeKind.Local).AddTicks(5009), true, 2, 2, 2 },
-                    { 3, new DateTime(2024, 2, 26, 18, 39, 52, 635, DateTimeKind.Local).AddTicks(5012), false, 1, 3, 3 }
+                    { 1, new DateTime(2024, 2, 26, 21, 14, 33, 228, DateTimeKind.Local).AddTicks(5622), true, 1, 1, 1 },
+                    { 2, new DateTime(2024, 2, 26, 21, 14, 33, 228, DateTimeKind.Local).AddTicks(5712), true, 2, 2, 2 },
+                    { 3, new DateTime(2024, 2, 26, 21, 14, 33, 228, DateTimeKind.Local).AddTicks(5715), false, 1, 3, 3 }
                 });
 
             migrationBuilder.InsertData(
                 table: "PaymentTypes",
-                columns: new[] { "Id", "Type", "UserId" },
+                columns: new[] { "Id", "Type" },
                 values: new object[,]
                 {
-                    { 1, "Type1", "user1" },
-                    { 2, "Type2", "user2" },
-                    { 3, "Type3", "user3" }
+                    { 1, "Type1" },
+                    { 2, "Type2" },
+                    { 3, "Type3" }
                 });
 
             migrationBuilder.InsertData(
@@ -146,22 +146,22 @@ namespace BangaZon_ND.Migrations
 
             migrationBuilder.InsertData(
                 table: "Products",
-                columns: new[] { "Id", "CategoryId", "Description", "PricePerUnit", "QuantityAvailable", "TimePosted", "Title", "userId" },
+                columns: new[] { "Id", "CategoryId", "Description", "PricePerUnit", "QuantityAvailable", "TimePosted", "Title", "UserId", "UserIsSeller" },
                 values: new object[,]
                 {
-                    { 1, "1", "Description 1", 100, "10", "2024-02-24", "Product 1", "user1" },
-                    { 2, "2", "Description 2", 200, "20", "2024-02-24", "Product 2", "user2" },
-                    { 3, "3", "Description 3", 300, "30", "2024-02-24", "Product 3", "user3" }
+                    { 1, 1, "Description 1", 100, 10, new DateTime(2024, 2, 26, 21, 14, 33, 228, DateTimeKind.Local).AddTicks(5787), "Product 1", 1, true },
+                    { 2, 2, "Description 2", 200, 20, new DateTime(2024, 2, 26, 21, 14, 33, 228, DateTimeKind.Local).AddTicks(5793), "Product 2", 2, false },
+                    { 3, 3, "Description 3", 300, 30, new DateTime(2024, 2, 26, 21, 14, 33, 228, DateTimeKind.Local).AddTicks(5798), "Product 3", 3, true }
                 });
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "Name", "email", "role" },
+                columns: new[] { "Id", "Email", "IsSeller", "Name" },
                 values: new object[,]
                 {
-                    { 1, "User 1", "user1@example.com", "Role1" },
-                    { 2, "User 2", "user2@example.com", "Role2" },
-                    { 3, "User 3", "user3@example.com", "Role3" }
+                    { 1, "user1@example.com", true, "Nicholas Davidson" },
+                    { 2, "user2@example.com", false, "James Collier" },
+                    { 3, "user3@example.com", false, "Willy Wonka" }
                 });
         }
 
