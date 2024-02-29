@@ -113,5 +113,19 @@ app.MapGet("/api/products/byCategory", (BangaZonDbContext db, int categoryId) =>
     return Results.Ok(productsByCategory);
 });
 
+// Create a New User
+app.MapPost("/api/createNewUser", (BangaZonDbContext db, User newUser) =>
+{
+    db.Users.Add(newUser);
+    db.SaveChanges();
+    return Results.Created($"/api/createNewUser/{newUser.Id}", newUser);
+});
+
+// Create a Order
+
+// Create New Product
+
+// Add a Product to an Order
+
 
 app.Run();
