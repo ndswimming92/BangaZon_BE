@@ -145,5 +145,27 @@ app.MapPost("/api/addProductToOrder", (BangaZonDbContext db, ProductOrder newPro
     return Results.Created($"/api/addProductToOrder/{newProductOrder.Id}", newProductOrder);
 });
 
+// Update a User
+app.MapPut("/api/updateUser/{id}", (BangaZonDbContext db, int id, User user) =>
+{
+    User updatedUser = db.Users.SingleOrDefault(user => user.Id == id);
+
+    if (updatedUser == null)
+    {
+        return Results.NotFound();
+    }
+
+    updatedUser.Name = user.Name;
+    updatedUser.Email = user.Email;
+    updatedUser.IsSeller = user.IsSeller;
+
+    db.SaveChanges();
+    return Results.NoContent();
+});
+
+// Update a Product
+
+
+// Update a Order
 
 app.Run();
