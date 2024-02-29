@@ -47,20 +47,17 @@ app.MapGet("/api/seeAllProducts", async (BangaZonDbContext db) =>
     
 });
 
-// Endpoint to search for products
-app.MapGet("/api/searchProducts", async (BangaZonDbContext db, string keyword) =>
+// Get Single product
+app.MapGet("/api/products/{id}", (BangaZonDbContext db, int id) =>
 {
-    
-    if (string.IsNullOrEmpty(keyword))
+    var productId = db.Products.FirstOrDefault(c => c.Id == id);
+
+    if (productId == null)
     {
-        return Results.BadRequest("Keyword cannot be empty.");
+        return Results.NotFound("Product Not Found.");
     }
 
-    var products = await db.Products
-        .Where(p => p.Title.Contains(keyword) || p.Description.Contains(keyword))
-        .ToListAsync();
-
-    return Results.Ok(products);
+    return Results.Ok(productId);
 });
 
 //Get All Users
