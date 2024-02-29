@@ -94,7 +94,11 @@ app.MapGet("/api/orders/forUser", (BangaZonDbContext db, int UserId) =>
     return Results.Ok(allOrdersForOneUser);
 });
 
-// Customer can delete a product from an order.
+// Get All Products
+app.MapGet("/api/products", (BangaZonDbContext db) =>
+{
+    return db.Products.ToList();
+});
 
 
 app.Run();
